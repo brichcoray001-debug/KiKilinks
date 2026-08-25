@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K-POP Link Hub! [Bright Ver.]</title>
+    <!-- โหลดฟอนต์ Google Fonts เพื่อความอินเตอร์และทันสมัย -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Noto+Sans+Thai:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* กำหนดพาเลทสี K-pop สดใส (Cyan, Yellow, Pink) */
+            --main-bg: #e0fbfc; /* สีฟ้าอ่อนมากๆ เกือบขาว */
+            --card-bg: #ffffff;
+            --primary-accent: #00e5ff; /* สีฟ้าครามสด (Cyan) */
+            --secondary-accent: #ffe100; /* สีเหลืองนีออน */
+            --hot-pink: #ff007f; /* สีชมพูสด */
+            --text-dark: #1a1a1a;
+            --text-light: #666666;
+            
+            /* ฟอนต์ */
+            --font-header: 'Montserrat', sans-serif; /* ฟอนต์อังกฤษหนา */
+            --font-body: 'Noto Sans Thai', sans-serif; /* ฟอนต์ไทยอ่านง่าย */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--main-bg);
+            /* เพิ่ม Background Pattern ลายกราฟิกจางๆ */
+            background-image: 
+                radial-gradient(var(--secondary-accent) 1px, transparent 1px),
+                radial-gradient(var(--primary-accent) 1px, transparent 1px);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
+            opacity: 0.9;
+            color: var(--text-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            font-family: var(--font-body);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 450px;
+            background: var(--card-bg);
+            padding: 50px 30px;
+            border-radius: 30px; /* ขอบมนมาก เพิ่มความมน */
+            /* เงาสามมิติแบบฟูๆ (Neon Shadow) */
+            box-shadow: 0 20px 40px rgba(0, 229, 255, 0.15), 0 10px 10px rgba(255, 225, 0, 0.1);
+            text-align: center;
+            border: 4px solid var(--text-dark); /* เส้นขอบหนา สไตล์การ์ตูน Pop Art */
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* ลูกเล่นตกแต่งมุมกล่อง */
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--hot-pink);
+            transform: rotate(45deg);
+        }
+
+        .profile-img-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--text-dark); /* เส้นขอบรูปหนา */
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* วงกลมซ้อนหลังรูปโปรไฟล์ */
+        .profile-img-container::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: var(--secondary-accent);
+            border-radius: 50%;
+            top: 10px;
+            left: 10px;
+            z-index: 0;
+            border: 5px solid var(--text-dark);
+        }
+
+        h1 {
+            font-family: var(--font-header);
+            font-weight: 800;
+            font-size: 1.8rem;
+            text-transform: uppercase; /* ตัวพิมพ์ใหญ่ทั้งหมด */
+            letter-spacing: -1px;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+            /* เพิ่มเงาอักษร */
+            text-shadow: 2px 2px 0px var(--primary-accent);
+        }
+
+        p.bio {
+            font-size: 1rem;
+            color: var(--text-light);
+            margin-bottom: 35px;
+            font-weight: 400;
+            line-height: 1.5;
+        }
+
+        .links-container {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .link-card {
+            display: block;
+            padding: 18px 25px;
+            background-color: var(--card-bg);
+            color: var(--text-dark);
+            text-decoration: none;
+            border-radius: 15px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            /* เส้นขอบหนา 3 มิติ */
+            border: 3px solid var(--text-dark);
+            box-shadow: 4px 4px 0px var(--text-dark);
+            transition: all 0.2s ease-in-out;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* เพิ่มไอคอน หรือ ลูกเล่นข้างหน้า (เช่น '▷') */
+        .link-card::before {
+            content: '▷';
+            margin-right: 10px;
+            font-family: var(--font-header);
+            color: var(--primary-accent);
+        }
+
+        /* Hover Effect: เด้งขึ้น และเปลี่ยนสีเป็นนีออน */
+        .link-card:hover {
+            transform: translate(-2px, -2px); /* เด้งสวนทางเงา */
+            box-shadow: 7px 7px 0px var(--text-dark);
+            background-color: var(--primary-accent); /* เปลี่ยนสีพื้นหลังเมื่อ Hover */
+            color: #ffffff;
+        }
+        
+        /* สลับสี Hover ให้ดูตื่นเต้น */
+        .link-card:nth-child(even):hover {
+            background-color: var(--hot-pink);
+        }
+        
+        /* แบนเนอร์ด้านล่างสุด */
+        .footer-tag {
+            margin-top: 40px;
+            font-family: var(--font-header);
+            font-size: 0.8rem;
+            color: #ffffff;
+            background-color: var(--text-dark);
+            padding: 5px 15px;
+            display: inline-block;
+            border-radius: 20px;
+            text-transform: uppercase;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- รูปโปรไฟล์พร้อมวงกลมซ้อน -->
+        <div class="profile-img-container">
+            <img src="https://via.placeholder.com/150/00e5ff/ffffff?text=IDOL" alt="Profile" class="profile-img">
+        </div>
+        
+        <!-- ชื่อสเตจเนม / ชื่อวง -->
+        <h1>@Idol_Name</h1>
+        <p class="bio">WELCOME TO MY OFFICIAL SPACE!<br>Feel the Energy & Stay Tuned ⚡️</p>
+
+        <!-- รายการลิงก์ -->
+        <div class="links-container">
+            <a href="#" target="_blank" class="link-card">OFFICIAL MUSIC VIDEO</a>
+            <a href="#" target="_blank" class="link-card">INSTAGRAM</a>
+            <a href="#" target="_blank" class="link-card">TIKTOK ⚡️⚡️</a>
+            <a href="#" target="_blank" class="link-card">SPOTIFY PLAYLIST</a>
+            <a href="#" target="_blank" class="link-card">FAN CLUB COMMUNITY</a>
+        </div>
+        
+        <div class="footer-tag">New Debut 2024</div>
+    </div>
+
+</body>
+</html>
