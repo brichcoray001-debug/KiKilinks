@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KiKilus7sin - Telegram & Premium Membership</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #0088cc;
+            --accent-gold: #ffb703;
+            --text-main: #1e293b;
+            --text-sub: #64748b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Kanit', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #e0f2fe 0%, #fef3c7 50%, #fce7f3 100%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 15px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 520px;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 25px 20px 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            position: relative;
+        }
+
+        /* Language Toggle Switch */
+        .lang-switch {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            background: #f1f5f9;
+            padding: 3px;
+            border-radius: 20px;
+            border: 1px solid #cbd5e1;
+        }
+
+        .lang-btn {
+            border: none;
+            background: transparent;
+            padding: 4px 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border-radius: 15px;
+            cursor: pointer;
+            color: #64748b;
+            transition: all 0.2s;
+        }
+
+        .lang-btn.active {
+            background: var(--primary);
+            color: #ffffff;
+            box-shadow: 0 2px 6px rgba(0, 136, 204, 0.3);
+        }
+
+        /* Profile Header */
+        .header {
+            text-align: center;
+            margin-top: 15px;
+            margin-bottom: 25px;
+        }
+
+        .avatar-wrapper {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+
+        .avatar {
+            width: 95px;
+            height: 95px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--primary);
+            box-shadow: 0 8px 16px rgba(0, 136, 204, 0.25);
+            background-color: #f0f9ff;
+        }
+
+        .badge-icon {
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            background: var(--accent-gold);
+            color: #fff;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            border: 2px solid #fff;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 6px;
+        }
+
+        .subtitle {
+            font-size: 0.9rem;
+            color: var(--text-sub);
+            font-weight: 400;
+            padding: 0 10px;
+        }
+
+        /* Telegram Links Section */
+        .links-section {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .btn-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 18px;
+            border-radius: 16px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.98rem;
+            transition: all 0.25s ease;
+        }
+
+        .btn-telegram-free {
+            background: #ffffff;
+            color: var(--primary);
+            border: 2px solid #0088cc;
+            box-shadow: 0 4px 12px rgba(0, 136, 204, 0.08);
+        }
+
+        .btn-telegram-free:hover {
+            background: #f0f9ff;
+            transform: translateY(-2px);
+        }
+
+        .btn-telegram-vip {
+            background: linear-gradient(135deg, #0088cc 0%, #005580 100%);
+            color: #ffffff;
+            border: none;
+            box-shadow: 0 6px 18px rgba(0, 136, 204, 0.3);
+        }
+
+        .btn-telegram-vip:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-tip {
+            background: linear-gradient(135deg, #ff4500 0%, #ff8c00 100%);
+            color: #ffffff;
+            border: none;
+            box-shadow: 0 6px 18px rgba(255, 69, 0, 0.25);
+        }
+
+        .btn-tip:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 22px rgba(255, 69, 0, 0.35);
+        }
+
+        .btn-contact {
+            background: #ffffff;
+            color: #334155;
+            border: 2px solid #e2e8f0;
+        }
+
+        .btn-contact:hover {
+            background: #f8fafc;
+            transform: translateY(-2px);
+        }
+
+        .btn-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn-left i {
+            font-size: 1.2rem;
+        }
+
+        .tag-badge {
+            font-size: 0.75rem;
+            padding: 3px 8px;
+            border-radius: 20px;
+        }
+
+        .bg-free { background: #e0f2fe; color: #0369a1; }
+        .bg-vip { background: var(--accent-gold); color: #78350f; font-weight: 700; }
+        .bg-tip { background: #fff3ed; color: #c2410c; font-weight: 700; }
+
+        /* Pricing Image Section */
+        .pricing-section {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            border: 1px solid #f1f5f9;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .pricing-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #334155;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .pricing-img-wrapper {
+            display: block;
+            width: 100%;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .pricing-img-wrapper:hover {
+            transform: scale(1.01);
+        }
+
+        .pricing-img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Toggle Text Details Button & Accordion */
+        .btn-toggle-details {
+            width: 100%;
+            background: #ffffff;
+            color: var(--primary);
+            border: 2px dashed var(--primary);
+            padding: 14px 18px;
+            border-radius: 16px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s ease;
+        }
+
+        .btn-toggle-details:hover {
+            background: #f0f9ff;
+        }
+
+        .text-details-container {
+            display: none;
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 20px;
+            margin-top: 10px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.03);
+            text-align: left;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #334155;
+            white-space: pre-line;
+        }
+
+        .footer-note {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-sub);
+        }
+
+        /* Modal View */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.85);
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            cursor: pointer;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90vh;
+            border-radius: 12px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- ปุ่มสลับภาษา TH / EN -->
+        <div class="lang-switch">
+            <button class="lang-btn active" id="btn-th" onclick="changeLang('th')">TH</button>
+            <button class="lang-btn" id="btn-en" onclick="changeLang('en')">EN</button>
+        </div>
+
+        <!-- Header -->
+        <div class="header">
+            <div class="avatar-wrapper">
+                <img src="https://i.pinimg.com/736x/ac/a0/5d/aca05d1a4e80fd2e07850c27a3da8f1a.jpg" alt="KiKilus7sin Profile" class="avatar">
+                <div class="badge-icon"><i class="fa-solid fa-crown"></i></div>
+            </div>
+            <h1>KiKilus7sin</h1>
+            <p class="subtitle" id="txt-subtitle">รวมช่องทาง Telegram ติดตามผลงาน และรายละเอียดแพ็กเกจสมาชิก</p>
+        </div>
+
+        <!-- Links -->
+        <div class="links-section">
+            <a href="https://t.me/+RT8spkk22iQ3MTg1" target="_blank" class="btn-link btn-telegram-free">
+                <div class="btn-left">
+                    <i class="fa-brands fa-telegram"></i>
+                    <span id="txt-btn-free">เข้าสู่ช่อง Telegram (ฟรี)</span>
+                </div>
+                <span class="tag-badge bg-free" id="txt-tag-free">FREE</span>
+            </a>
+
+            <!-- ลิงก์สมัคร Premium VIP -->
+            <a href="https://buy.stripe.com/aFa7sNbbMeph4cldIp9MY04" target="_blank" class="btn-link btn-telegram-vip">
+                <div class="btn-left">
+                    <i class="fa-solid fa-gem"></i>
+                    <span id="txt-btn-vip">สมัคร Premium VIP ($3/เดือน)</span>
+                </div>
+                <span class="tag-badge bg-vip">VIP</span>
+            </a>
+
+            <!-- ปุ่ม Tip KiKi -->
+            <a href="https://buy.stripe.com/fZu3cxa7I94X7ox8o59MY0a" target="_blank" class="btn-link btn-tip">
+                <div class="btn-left">
+                    <i class="fa-solid fa-fire-flame-curved"></i>
+                    <span id="txt-btn-tip">Tip KiKi ❤️‍🔥 (ให้ทิปซัพพอร์ต)</span>
+                </div>
+                <span class="tag-badge bg-tip">DONATE</span>
+            </a>
+
+            <a href="https://t.me/your_admin_contact" target="_blank" class="btn-link btn-contact">
+                <div class="btn-left">
+                    <i class="fa-solid fa-paper-plane"></i>
+                    <span id="txt-btn-contact">ติดต่อแอดมิน / สั่ง Commission</span>
+                </div>
+                <i class="fa-solid fa-chevron-right" style="font-size: 0.8rem; opacity: 0.5;"></i>
+            </a>
+        </div>
+
+        <!-- Pricing Section (Image) -->
+        <div class="pricing-section">
+            <div class="pricing-title">
+                <i class="fa-solid fa-tags" style="color: var(--primary);"></i>
+                <span id="txt-pricing-title">รายละเอียดและเรทราคา</span>
+            </div>
+            
+            <div class="pricing-img-wrapper" onclick="openModal()">
+                <img src="https://i.ibb.co/tMKbMhCW/Ki-Ki-Price.png" alt="Ki-Ki-Price" class="pricing-img" id="rateImage">
+            </div>
+            
+            <p style="font-size: 0.8rem; color: #94a3b8; margin-top: 8px;" id="txt-img-note">(แตะที่รูปภาพเพื่อขยายดูขนาดเต็ม)</p>
+        </div>
+
+        <!-- Toggle Text Details Button -->
+        <button class="btn-toggle-details" onclick="toggleDetails()">
+            <div class="btn-left">
+                <i class="fa-solid fa-file-lines"></i>
+                <span id="txt-btn-details">แสดงรายละเอียดเรทราคาแบบข้อความ</span>
+            </div>
+            <i class="fa-solid fa-chevron-down" id="arrow-icon"></i>
+        </button>
+
+        <!-- Text Details Dropdown Content -->
+        <div class="text-details-container" id="detailsContainer"></div>
+
+        <div class="footer-note">
+            <p id="txt-footer">❤️ ขอบคุณสำหรับทุกการสนับสนุนครับ!</p>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <img class="modal-content" id="imgFull" alt="Ki-Ki-Price Full View">
+    </div>
+
+    <script>
+        let currentLang = 'th';
+
+        const textDetails = {
+            th: `🔥 PREMIUM CHANNEL & COMMISSIONS 🔥
+
+━━━━━━━━━━━━━━━━━━━━━━
+
+👑 PREMIUM CHANNEL (ช่องพรีเมียม)
+💰 ค่าบริการ: $3 / เดือน
+✔️ ระบบชำระเงินปลอดภัย 100%
+✔️ เข้าถึงเซ็ทรูปภาพทั้งหมดและคอนเทนต์ Exclusive ได้ไม่จำกัด
+✔️ ยกเลิกเมื่อไหร่ก็ได้
+
+⚠️ ลำดับคิวในการทำ Request :
+🌟 Exclusive Commission
+💎 Supreme Supporter
+🔹 Premium Supporter
+👥 Free Requests
+
+━━━━━━━━━━━━━━━━━━━━━━
+
+💎 COMMISSION PACKAGES (แพ็กเกจสั่งทำ)
+
+🔹 Premium Supporter Package — $3
+✔️ ได้รับสิทธิ์รันคิว Priority สำหรับไอดอลที่ชอบ
+
+🔹 Supreme Supporter Package — $5
+✔️ ได้รับสิทธิ์รันคิว Priority สำหรับไอดอลที่ชอบ
+✔️ สิทธิพิเศษ: ได้รับไฟล์รูปภาพไปเก็บไว้ด้วย
+
+📌 ทุกเซ็ทจะประกอบด้วยรูปภาพประมาณ 30–50 ภาพ
+📌 Commission จะยึดรูปแบบ สไตล์ และจำนวนรูปเหมือนกับเซ็ทภาพที่โพสต์ลงในกลุ่มครับ
+📌 รับเฉพาะงาน ชายเดี่ยว และ คอนเทนต์ Gay เท่านั้น
+📌 สามารถบรีฟหรือเสนอไอเดียที่ต้องการได้ครับ! แต่ขอแจ้งไว้ก่อนว่าอาจจะไม่สามารถการันตีรายละเอียดได้เป๊ะ 100% หรืออาจะทำไม่ได้ เนื่องจากข้อจำกัดของระบบ AI ครับ
+
+📢 ข้อควรรู้เกี่ยวกับการแชร์ไฟล์งาน:
+ผลงานที่ Gen ขึ้นมาทั้งหมดจะถูกอัปโหลดลงในช่อง Telegram (ทั้งช่อง Premium และ Free) โดยจะไม่อนุญาตให้กดเซฟหรือดาวน์โหลดไฟล์
+
+👑 สมาชิก Premium: คุณสามารถเลือกได้เองว่าต้องการให้แชร์เซ็ทงานของคุณลงช่อง Free หรือไม่ (หากยินดีให้แชร์ ผมจะลงให้เครดิตผู้จ้างในโพสต์ด้วย)
+👥 สมาชิก Free: ผลงาน Request ของคุณจะถูกอัปโหลดลงทั้งช่อง Free และ Premium โดยอัตโนมัติครับ
+
+⚠️ หมายเหตุ: ผลงานที่สั่งทำจากแพ็กเกจเหล่านี้ อาจจะถูกนำไปลงขายซ้ำให้ลูกค้าคนอื่นในอนาคต
+
+━━━━━━━━━━━━━━━━━━━━━━
+
+⭐ EXCLUSIVE COMMISSION (งานส่วนตัว 100%) — $10
+✔️ ส่งมอบไฟล์รูปภาพให้คุณคนเดียวโดยตรงผ่าน DM
+✔️ ไม่มีลายน้ำ (Watermark-free)
+✔️ Exclusive 100%: เป็นสิทธิ์ของคุณคนเดียวเท่านั้น จะไม่นำไปโพสต์สาธารณะหรือนำไปขายต่อเด็ดขาด!
+
+เหมาะมากๆ สำหรับ:
+❤️ คนที่มีแค่คุณที่รู้จัก
+📷 จำเป็นต้องมีรูปภาพอ้างอิง (Reference Photos) ทั้งนี้ คุณภาพของงาน finale จะขึ้นอยู่กับความคมชัดของรูปต้นฉบับที่ส่งมาให้ครับ
+
+━━━━━━━━━━━━━━━━━━━━━━
+
+📸 IDOL PHOTO SETS (ย้อนหลัง)
+(สำหรับใครที่อยากซื้อไฟล์รูปภาพเซ็ทเก่าๆ ไปดาวน์โหลดเก็บไว้)
+
+🔹 1 เซ็ท: $3.50
+🔹 2 เซ็ท: $6.00
+🔹 มินิเซ็ท (น้อยกว่า 20 รูป): $2.00 / เซ็ท
+
+━━━━━━━━━━━━━━━━━━━━━━
+
+ℹ️ FYI (แจ้งเพื่อทราบ)
+การตั้งราคาคำนวณจาก:
+• จำนวนเครดิต AI ที่ใช้ในการ Gen (รวมถึงรูปที่ Gen เสียแล้วต้องกดใหม่)
+• เวลาและการดำเนินการในแต่ละเซ็ท
+
+ทุกการซัพพอร์ตของคุณจะนำไปเป็นทุนในการซื้อเครดิต Gen รูป และช่วยเติมพลังให้ผมได้สร้างสรรค์ผลงานให้ทุกคนได้ดูต่อไปเรื่อยๆ ครับ
+
+ขอบคุณมากๆ ที่ช่วยซัพพอร์ตนะครับ ❤️
+
+🔒 ความปลอดภัยและความเป็นส่วนตัวในการชำระเงิน:
+ระบบชำระเงินดำเนินการอย่างปลอดภัยผ่าน Stripe ข้อมูลทางการเงินและตัวตนของคุณจะถูกเก็บเป็นความลับ 100% ข้อมูลเดียวที่ผมมองเห็นคือ Email เท่านั้น หมดกังวลเรื่องความเป็นส่วนตัวได้เลยครับ
+
+🔄 นโยบายการคืนเงิน:
+หากผมไม่สามารถทำตาม Request/Commission ของคุณได้ ยินดีคืนเงินให้เต็มจำนวนครับ (หมายเหตุ: กระบวนการคืนเงินผ่าน Stripe อาจใช้เวลาดำเนินการสูงสุด 30 วันครับ)`,
+            en: `🔥 PREMIUM CHANNEL & COMMISSIONS 🔥
+
+━━━━━━━━━━━━━━━━━━━━━━
+
+👑 PREMIUM CHANNEL
+💰 Subscription: $3 / month
+
+✔️ Secure payment process
+✔️ Full access to all photo sets & exclusive videos
+✔️ Cancel anytime, no commitment
+
+⚠️ Priority Order for Requests:
+🌟 Exclusive Commission
+💎 Supreme Supporter
+🔹 Premium Supporter
+👥 Free Requests
+
+━━━━━━━━━━━━━━━━━━━━━━
+
+💎 COMMISSION PACKAGES
+Wanna see your fave idol quick?
+
+🔹 Premium Supporter Package — $3
+✔️ Priority request for your favourite idol
+
+🔹 Supreme Supporter Package — $5
+✔️ Priority request processing
+✔️ Special Perk: You receive the files
+
+📌 Each set consists of 30–50 pics
+📌 Commissions will match the same style and quality as the photo sets shared in the group.
+📌 Content is strictly solo male idols and gay content only.
+📌 You can request or suggest custom ideas! However, please note that specific details cannot be 100% guaranteed or cannot do due to AI generation limitations.
+
+📢 Note on File Sharing:
+All generated content will be uploaded to Telegram channels (Premium/Free) where saving/downloading is restricted.
+
+👑 Premium Members: You can choose whether your requested content is shared to the Free channel. You will be credited if you share to the Free channel!
+👥 Free Members: Your requested content will be shared to both the Free and Premium channels.
+
+⚠️ Disclaimer: Purchased/requested content from these tiers may be resold to other customers in the future.
+
+━━━━━━━━━━━━━━━━━━━━━━
+
+⭐ EXCLUSIVE COMMISSION (No Sharing) — $10
+✔️ Private delivery directly to you
+✔️ Completely watermark-free
+✔️ 100% Exclusive: Only for you, will never be shared or resold
+
+Perfect for:
+❤️ Custom concepts or people you have fantasies about
+❤️ Niche idols or people only you know
+📷 Reference photos are required. The final quality depends entirely on the quality of the reference images provided.
+
+━━━━━━━━━━━━━━━━━━━━━━
+
+📸 IDOL PHOTO SETS
+(For anyone who wants to purchase and save past files)
+
+🔹 1 Set: $3.50
+🔹 2 Sets: $6
+🔹 Mini Set (< 20 pics): $2
+
+━━━━━━━━━━━━━━━━━━━━━━
+
+ℹ️ FYI (For Your Information)
+The pricing is calculated based on:
+• The number of AI generation credits used
+• The time and effort spent creating the content
+
+Your support directly helps cover generation costs and allows me to keep creating higher-quality content for everyone.
+
+Thank you so much for your support! ❤️
+
+🔒 Payment & Privacy:
+Payments are processed safely via Stripe. Your financial and personal details are completely secure—the only information visible to me is your email address, so you don't need to worry about your privacy or identity.
+
+🔄 Refund Policy:
+If I am unable to fulfill your request, you will receive a refund. Please note that the refund process may take up to 30 days to process through Stripe.`
+        };
+
+        const translations = {
+            th: {
+                subtitle: "รวมช่องทาง Telegram ติดตามผลงาน และรายละเอียดแพ็กเกจสมาชิก",
+                btnFree: "เข้าสู่ช่อง Telegram (ฟรี)",
+                tagFree: "FREE",
+                btnVip: "สมัคร Premium VIP ($3/เดือน)",
+                btnTip: "Tip KiKi ❤️‍🔥 (ให้ทิปซัพพอร์ต)",
+                btnContact: "ติดต่อแอดมิน / สั่ง Commission",
+                pricingTitle: "รายละเอียดและเรทราคา",
+                imgNote: "(แตะที่รูปภาพเพื่อขยายดูขนาดเต็ม)",
+                btnDetailsShow: "แสดงรายละเอียดเรทราคาแบบข้อความ",
+                btnDetailsHide: "ซ่อนรายละเอียดเรทราคาแบบข้อความ",
+                footer: "❤️ ขอบคุณสำหรับทุกการสนับสนุนครับ!"
+            },
+            en: {
+                subtitle: "Telegram channels, membership details & commission info.",
+                btnFree: "Join Free Telegram Channel",
+                tagFree: "FREE",
+                btnVip: "Join Premium VIP ($3/mo)",
+                btnTip: "Tip KiKi ❤️‍🔥 (Send Tip/Support)",
+                btnContact: "Contact Admin / Request Commission",
+                pricingTitle: "Pricing & Package Details",
+                imgNote: "(Tap image to view full size)",
+                btnDetailsShow: "Show Pricing Details (Text)",
+                btnDetailsHide: "Hide Pricing Details (Text)",
+                footer: "❤️ Thank you for your support!"
+            }
+        };
+
+        function changeLang(lang) {
+            currentLang = lang;
+            document.getElementById('btn-th').classList.toggle('active', lang === 'th');
+            document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+
+            document.getElementById('txt-subtitle').innerText = translations[lang].subtitle;
+            document.getElementById('txt-btn-free').innerText = translations[lang].btnFree;
+            document.getElementById('txt-tag-free').innerText = translations[lang].tagFree;
+            document.getElementById('txt-btn-vip').innerText = translations[lang].btnVip;
+            document.getElementById('txt-btn-tip').innerText = translations[lang].btnTip;
+            document.getElementById('txt-btn-contact').innerText = translations[lang].btnContact;
+            document.getElementById('txt-pricing-title').innerText = translations[lang].pricingTitle;
+            document.getElementById('txt-img-note').innerText = translations[lang].imgNote;
+            document.getElementById('txt-footer').innerText = translations[lang].footer;
+
+            // Update Accordion Text
+            const container = document.getElementById('detailsContainer');
+            container.innerText = textDetails[lang];
+
+            const isVisible = container.style.display === 'block';
+            document.getElementById('txt-btn-details').innerText = isVisible 
+                ? translations[lang].btnDetailsHide 
+                : translations[lang].btnDetailsShow;
+        }
+
+        function toggleDetails() {
+            const container = document.getElementById('detailsContainer');
+            const arrow = document.getElementById('arrow-icon');
+            const btnText = document.getElementById('txt-btn-details');
+
+            if (container.style.display === 'block') {
+                container.style.display = 'none';
+                arrow.className = 'fa-solid fa-chevron-down';
+                btnText.innerText = translations[currentLang].btnDetailsShow;
+            } else {
+                container.style.display = 'block';
+                arrow.className = 'fa-solid fa-chevron-up';
+                btnText.innerText = translations[currentLang].btnDetailsHide;
+            }
+        }
+
+        // Initialize content
+        document.getElementById('detailsContainer').innerText = textDetails.th;
+
+        function openModal() {
+            var modal = document.getElementById("imageModal");
+            var img = document.getElementById("rateImage");
+            var modalImg = document.getElementById("imgFull");
+            modal.style.display = "flex";
+            modalImg.src = img.src;
+        }
+
+        function closeModal() {
+            document.getElementById("imageModal").style.display = "none";
+        }
+    </script>
+</body>
+</html>
