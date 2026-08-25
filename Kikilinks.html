@@ -7,7 +7,7 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <style>
         :root {
@@ -184,14 +184,28 @@
             box-shadow: 0 8px 22px rgba(255, 69, 0, 0.35);
         }
 
-        .btn-contact {
-            background: #ffffff;
-            color: #334155;
-            border: 2px solid #e2e8f0;
+        /* ปุ่ม Telegram แบบสีฟ้าอ่อน */
+        .btn-contact-tg {
+            background: #e0f2fe;
+            color: #0284c7;
+            border: 2px solid #bae6fd;
         }
 
-        .btn-contact:hover {
-            background: #f8fafc;
+        .btn-contact-tg:hover {
+            background: #bae6fd;
+            transform: translateY(-2px);
+        }
+
+        /* ปุ่ม Twitter / X */
+        .btn-contact-x {
+            background: #0f172a;
+            color: #ffffff;
+            border: none;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
+        }
+
+        .btn-contact-x:hover {
+            background: #1e293b;
             transform: translateY(-2px);
         }
 
@@ -368,10 +382,20 @@
                 <span class="tag-badge bg-tip">DONATE</span>
             </a>
 
-            <a href="https://t.me/your_admin_contact" target="_blank" class="btn-link btn-contact">
+            <!-- ติดต่อทาง Telegram -->
+            <a href="https://t.me/your_admin_contact" target="_blank" class="btn-link btn-contact-tg">
                 <div class="btn-left">
-                    <i class="fa-solid fa-paper-plane"></i>
-                    <span id="txt-btn-contact">ติดต่อแอดมิน / สั่ง Commission</span>
+                    <i class="fa-brands fa-telegram"></i>
+                    <span id="txt-btn-contact-tg">ติดต่อแอดมิน / สั่ง Commission (Telegram)</span>
+                </div>
+                <i class="fa-solid fa-chevron-right" style="font-size: 0.8rem; opacity: 0.6;"></i>
+            </a>
+
+            <!-- ติดต่อทาง Twitter / X -->
+            <a href="https://x.com/newKiKi7sin" target="_blank" class="btn-link btn-contact-x">
+                <div class="btn-left">
+                    <i class="fa-brands fa-x-twitter"></i>
+                    <span id="txt-btn-contact-x">ติดต่อแอดมิน / สั่ง Commission (Twitter / X)</span>
                 </div>
                 <i class="fa-solid fa-chevron-right" style="font-size: 0.8rem; opacity: 0.5;"></i>
             </a>
@@ -581,7 +605,8 @@ If I am unable to fulfill your request, you will receive a refund. Please note t
                 tagFree: "FREE",
                 btnVip: "สมัคร Premium VIP ($3/เดือน)",
                 btnTip: "Tip KiKi ❤️‍🔥 (ให้ทิปซัพพอร์ต)",
-                btnContact: "ติดต่อแอดมิน / สั่ง Commission",
+                btnContactTg: "ติดต่อแอดมิน / สั่ง Commission (Telegram)",
+                btnContactX: "ติดต่อแอดมิน / สั่ง Commission (Twitter / X)",
                 pricingTitle: "รายละเอียดและเรทราคา",
                 imgNote: "(แตะที่รูปภาพเพื่อขยายดูขนาดเต็ม)",
                 btnDetailsShow: "แสดงรายละเอียดเรทราคาแบบข้อความ",
@@ -594,7 +619,8 @@ If I am unable to fulfill your request, you will receive a refund. Please note t
                 tagFree: "FREE",
                 btnVip: "Join Premium VIP ($3/mo)",
                 btnTip: "Tip KiKi ❤️‍🔥 (Send Tip/Support)",
-                btnContact: "Contact Admin / Request Commission",
+                btnContactTg: "Contact Admin / Commission (Telegram)",
+                btnContactX: "Contact Admin / Commission (Twitter / X)",
                 pricingTitle: "Pricing & Package Details",
                 imgNote: "(Tap image to view full size)",
                 btnDetailsShow: "Show Pricing Details (Text)",
@@ -613,7 +639,8 @@ If I am unable to fulfill your request, you will receive a refund. Please note t
             document.getElementById('txt-tag-free').innerText = translations[lang].tagFree;
             document.getElementById('txt-btn-vip').innerText = translations[lang].btnVip;
             document.getElementById('txt-btn-tip').innerText = translations[lang].btnTip;
-            document.getElementById('txt-btn-contact').innerText = translations[lang].btnContact;
+            document.getElementById('txt-btn-contact-tg').innerText = translations[lang].btnContactTg;
+            document.getElementById('txt-btn-contact-x').innerText = translations[lang].btnContactX;
             document.getElementById('txt-pricing-title').innerText = translations[lang].pricingTitle;
             document.getElementById('txt-img-note').innerText = translations[lang].imgNote;
             document.getElementById('txt-footer').innerText = translations[lang].footer;
