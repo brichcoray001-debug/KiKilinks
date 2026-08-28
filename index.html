@@ -7,7 +7,7 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <style>
         :root {
@@ -24,8 +24,11 @@
             font-family: 'Kanit', sans-serif;
         }
 
+        /* 1. Animated Gradient Background (พื้นหลังขยับได้) */
         body {
-            background: linear-gradient(135deg, #e0f2fe 0%, #fef3c7 50%, #fce7f3 100%);
+            background: linear-gradient(-45deg, #e0f2fe, #fef3c7, #fce7f3, #e0f2fe);
+            background-size: 400% 400%;
+            animation: gradientBG 12s ease infinite;
             color: var(--text-main);
             min-height: 100vh;
             display: flex;
@@ -34,11 +37,149 @@
             padding: 20px 15px;
         }
 
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Age Verification Popup Styles */
+        .age-gate-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(12px);
+            z-index: 10000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .age-gate-modal {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 30px 25px;
+            max-width: 440px;
+            width: 100%;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .age-gate-icon {
+            font-size: 2.8rem;
+            color: #ef4444;
+            margin-bottom: 12px;
+            animation: pulse 2s infinite;
+        }
+
+        .age-gate-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 8px;
+        }
+
+        .age-gate-desc {
+            font-size: 0.88rem;
+            color: #64748b;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .age-gate-checkboxes {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            text-align: left;
+            margin-bottom: 24px;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 0.85rem;
+            color: #334155;
+            cursor: pointer;
+            line-height: 1.4;
+            user-select: none;
+            background: #f8fafc;
+            padding: 10px 12px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            transition: all 0.2s;
+        }
+
+        .checkbox-label:hover {
+            border-color: var(--primary);
+            background: #f0f9ff;
+        }
+
+        .checkbox-label input[type="checkbox"] {
+            margin-top: 2px;
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary);
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .age-gate-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-gate {
+            flex: 1;
+            padding: 12px 16px;
+            border-radius: 14px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-gate-leave {
+            background: #f1f5f9;
+            color: #64748b;
+        }
+
+        .btn-gate-leave:hover {
+            background: #e2e8f0;
+            color: #334155;
+        }
+
+        .btn-gate-continue {
+            background: var(--primary);
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(0, 136, 204, 0.25);
+        }
+
+        .btn-gate-continue:disabled {
+            background: #cbd5e1;
+            color: #94a3b8;
+            box-shadow: none;
+            cursor: not-allowed;
+        }
+
+        /* Main Container */
         .container {
             width: 100%;
             max-width: 520px;
             background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
             border-radius: 24px;
             padding: 25px 20px 30px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
@@ -46,7 +187,6 @@
             position: relative;
         }
 
-        /* Language Toggle Switch */
         .lang-switch {
             position: absolute;
             top: 20px;
@@ -76,17 +216,29 @@
             box-shadow: 0 2px 6px rgba(0, 136, 204, 0.3);
         }
 
-        /* Profile Header */
         .header {
             text-align: center;
             margin-top: 15px;
             margin-bottom: 25px;
         }
 
+        /* 2. Animated Avatar Aura (ขอบออร่าหมุนได้) */
         .avatar-wrapper {
             position: relative;
             display: inline-block;
             margin-bottom: 12px;
+            padding: 4px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #0088cc, #ffb703, #ff4500, #0088cc);
+            background-size: 300% 300%;
+            animation: auraRotate 4s linear infinite;
+            box-shadow: 0 8px 20px rgba(0, 136, 204, 0.3);
+        }
+
+        @keyframes auraRotate {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .avatar {
@@ -94,8 +246,8 @@
             height: 95px;
             border-radius: 50%;
             object-fit: cover;
-            border: 4px solid var(--primary);
-            box-shadow: 0 8px 16px rgba(0, 136, 204, 0.25);
+            border: 3px solid #ffffff;
+            display: block;
             background-color: #f0f9ff;
         }
 
@@ -113,13 +265,43 @@
             justify-content: center;
             font-size: 14px;
             border: 2px solid #fff;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+
+        /* 3. Status Badge Online (ป้ายไฟกระพริบ) */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(34, 197, 94, 0.12);
+            color: #15803d;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #22c55e;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #22c55e;
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.85); }
         }
 
         h1 {
             font-size: 1.5rem;
             font-weight: 700;
             color: #0f172a;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
 
         .subtitle {
@@ -129,7 +311,6 @@
             padding: 0 10px;
         }
 
-        /* Telegram Links Section */
         .links-section {
             display: flex;
             flex-direction: column;
@@ -147,6 +328,8 @@
             font-weight: 600;
             font-size: 0.98rem;
             transition: all 0.25s ease;
+            position: relative;
+            overflow: hidden;
         }
 
         .btn-telegram-free {
@@ -159,8 +342,10 @@
         .btn-telegram-free:hover {
             background: #f0f9ff;
             transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 136, 204, 0.15);
         }
 
+        /* 4. Shimmer Effect for VIP Button (ประกายวิ่งผ่าน) */
         .btn-telegram-vip {
             background: linear-gradient(135deg, #0088cc 0%, #005580 100%);
             color: #ffffff;
@@ -168,10 +353,27 @@
             box-shadow: 0 6px 18px rgba(0, 136, 204, 0.3);
         }
 
-        .btn-telegram-vip:hover {
-            transform: translateY(-2px);
+        .btn-telegram-vip::after {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: linear-gradient(60deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+            transform: rotate(30deg);
+            animation: shimmer 3.5s infinite;
         }
 
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) rotate(30deg); }
+            100% { transform: translateX(100%) rotate(30deg); }
+        }
+
+        .btn-telegram-vip:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 22px rgba(0, 136, 204, 0.45);
+        }
+
+        /* 5. Pulsing Flame Icon for Tip (ไฟเต้น) */
         .btn-tip {
             background: linear-gradient(135deg, #ff4500 0%, #ff8c00 100%);
             color: #ffffff;
@@ -179,19 +381,41 @@
             box-shadow: 0 6px 18px rgba(255, 69, 0, 0.25);
         }
 
+        .btn-tip i.fa-fire-flame-curved {
+            animation: pulse 1.2s infinite;
+            display: inline-block;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+        }
+
         .btn-tip:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 22px rgba(255, 69, 0, 0.35);
+            box-shadow: 0 8px 22px rgba(255, 69, 0, 0.4);
         }
 
-        .btn-contact {
-            background: #ffffff;
-            color: #334155;
-            border: 2px solid #e2e8f0;
+        .btn-contact-tg {
+            background: #e0f2fe;
+            color: #0284c7;
+            border: 2px solid #bae6fd;
         }
 
-        .btn-contact:hover {
-            background: #f8fafc;
+        .btn-contact-tg:hover {
+            background: #bae6fd;
+            transform: translateY(-2px);
+        }
+
+        .btn-contact-x {
+            background: #0f172a;
+            color: #ffffff;
+            border: none;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
+        }
+
+        .btn-contact-x:hover {
+            background: #1e293b;
             transform: translateY(-2px);
         }
 
@@ -199,6 +423,7 @@
             display: flex;
             align-items: center;
             gap: 12px;
+            z-index: 1;
         }
 
         .btn-left i {
@@ -209,13 +434,13 @@
             font-size: 0.75rem;
             padding: 3px 8px;
             border-radius: 20px;
+            z-index: 1;
         }
 
         .bg-free { background: #e0f2fe; color: #0369a1; }
         .bg-vip { background: var(--accent-gold); color: #78350f; font-weight: 700; }
         .bg-tip { background: #fff3ed; color: #c2410c; font-weight: 700; }
 
-        /* Pricing Image Section */
         .pricing-section {
             background: #ffffff;
             border-radius: 20px;
@@ -244,11 +469,12 @@
             overflow: hidden;
             border: 1px solid #e2e8f0;
             cursor: pointer;
-            transition: transform 0.2s ease;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
         }
 
         .pricing-img-wrapper:hover {
-            transform: scale(1.01);
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
         }
 
         .pricing-img {
@@ -257,7 +483,6 @@
             display: block;
         }
 
-        /* Toggle Text Details Button & Accordion */
         .btn-toggle-details {
             width: 100%;
             background: #ffffff;
@@ -291,6 +516,7 @@
             line-height: 1.6;
             color: #334155;
             white-space: pre-line;
+            animation: fadeIn 0.3s ease-in-out;
         }
 
         .footer-note {
@@ -300,7 +526,6 @@
             color: var(--text-sub);
         }
 
-        /* Modal View */
         .modal {
             display: none;
             position: fixed;
@@ -312,16 +537,45 @@
             align-items: center;
             padding: 20px;
             cursor: pointer;
+            backdrop-filter: blur(5px);
         }
 
         .modal-content {
             max-width: 90%;
             max-height: 90vh;
             border-radius: 12px;
+            animation: fadeIn 0.25s ease-out;
         }
     </style>
 </head>
 <body>
+
+    <!-- Age Verification Popup (Modal) -->
+    <div class="age-gate-overlay" id="ageGateModal">
+        <div class="age-gate-modal">
+            <div class="age-gate-icon">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <h2 class="age-gate-title" id="txt-gate-title">Age Verification</h2>
+            <p class="age-gate-desc" id="txt-gate-desc"> You must be 18+ to join this site. Contents are generated by AI and do not represent real persons.</p>
+            
+            <div class="age-gate-checkboxes">
+                <label class="checkbox-label">
+                    <input type="checkbox" id="checkAge" onchange="checkAgeGateInputs()">
+                    <span id="txt-check-age">ฉันมีอายุ 18 ปีขึ้นไป (I am 18 years of age or older)</span>
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="checkAi" onchange="checkAgeGateInputs()">
+                    <span id="txt-check-ai">ฉันเข้าใจว่าเนื้อหาทั้งหมดเป็นภาพที่สร้างขึ้น ไม่ใช่บุคคลจริง (I understand all contents are generated and not real persons)</span>
+                </label>
+            </div>
+
+            <div class="age-gate-actions">
+                <button class="btn-gate btn-gate-leave" onclick="leaveSite()" id="txt-btn-leave">Leave</button>
+                <button class="btn-gate btn-gate-continue" id="btnContinue" disabled onclick="acceptAgeGate()">Continue</button>
+            </div>
+        </div>
+    </div>
 
     <div class="container">
         <!-- ปุ่มสลับภาษา TH / EN -->
@@ -336,6 +590,13 @@
                 <img src="https://i.pinimg.com/736x/ac/a0/5d/aca05d1a4e80fd2e07850c27a3da8f1a.jpg" alt="KiKilus7sin Profile" class="avatar">
                 <div class="badge-icon"><i class="fa-solid fa-crown"></i></div>
             </div>
+            <br>
+            <!-- Live Status Indicator -->
+            <div class="status-badge">
+                <span class="status-dot"></span>
+                <span id="txt-status">พร้อมรับงาน / คอนเทนต์ใหม่พร้อมส่ง</span>
+            </div>
+            
             <h1>KiKilus7sin</h1>
             <p class="subtitle" id="txt-subtitle">รวมช่องทาง Telegram ติดตามผลงาน และรายละเอียดแพ็กเกจสมาชิก</p>
         </div>
@@ -368,10 +629,20 @@
                 <span class="tag-badge bg-tip">DONATE</span>
             </a>
 
-            <a href="https://t.me/your_admin_contact" target="_blank" class="btn-link btn-contact">
+            <!-- ติดต่อทาง Telegram -->
+            <a href="https://t.me/your_admin_contact" target="_blank" class="btn-link btn-contact-tg">
                 <div class="btn-left">
-                    <i class="fa-solid fa-paper-plane"></i>
-                    <span id="txt-btn-contact">ติดต่อแอดมิน / สั่ง Commission</span>
+                    <i class="fa-brands fa-telegram"></i>
+                    <span id="txt-btn-contact-tg">ติดต่อแอดมิน / สั่ง Commission (Telegram)</span>
+                </div>
+                <i class="fa-solid fa-chevron-right" style="font-size: 0.8rem; opacity: 0.6;"></i>
+            </a>
+
+            <!-- ติดต่อทาง Twitter / X -->
+            <a href="https://x.com/newKiKi7sin" target="_blank" class="btn-link btn-contact-x">
+                <div class="btn-left">
+                    <i class="fa-brands fa-x-twitter"></i>
+                    <span id="txt-btn-contact-x">ติดต่อแอดมิน / สั่ง Commission (Twitter / X)</span>
                 </div>
                 <i class="fa-solid fa-chevron-right" style="font-size: 0.8rem; opacity: 0.5;"></i>
             </a>
@@ -415,6 +686,23 @@
 
     <script>
         let currentLang = 'th';
+
+        // Age Verification Logic
+        function checkAgeGateInputs() {
+            const checkAge = document.getElementById('checkAge').checked;
+            const checkAi = document.getElementById('checkAi').checked;
+            const btnContinue = document.getElementById('btnContinue');
+
+            btnContinue.disabled = !(checkAge && checkAi);
+        }
+
+        function acceptAgeGate() {
+            document.getElementById('ageGateModal').style.display = 'none';
+        }
+
+        function leaveSite() {
+            window.location.href = "https://www.google.com";
+        }
 
         const textDetails = {
             th: `🔥 PREMIUM CHANNEL & COMMISSIONS 🔥
@@ -581,12 +869,20 @@ If I am unable to fulfill your request, you will receive a refund. Please note t
                 tagFree: "FREE",
                 btnVip: "สมัคร Premium VIP ($3/เดือน)",
                 btnTip: "Tip KiKi ❤️‍🔥 (ให้ทิปซัพพอร์ต)",
-                btnContact: "ติดต่อแอดมิน / สั่ง Commission",
+                btnContactTg: "ติดต่อแอดมิน / สั่ง Commission (Telegram)",
+                btnContactX: "ติดต่อแอดมิน / สั่ง Commission (Twitter / X)",
                 pricingTitle: "รายละเอียดและเรทราคา",
                 imgNote: "(แตะที่รูปภาพเพื่อขยายดูขนาดเต็ม)",
                 btnDetailsShow: "แสดงรายละเอียดเรทราคาแบบข้อความ",
                 btnDetailsHide: "ซ่อนรายละเอียดเรทราคาแบบข้อความ",
-                footer: "❤️ ขอบคุณสำหรับทุกการสนับสนุนครับ!"
+                footer: "❤️ ขอบคุณสำหรับทุกการสนับสนุนครับ!",
+                gateTitle: "Age Verification (ยืนยันตัวตน)",
+                gateDesc: "คุณต้องมีอายุ 18 ปีขึ้นไปเพื่อเข้าสู่เว็บไซต์ คอนเทนต์ทั้งหมดเป็นภาพที่สร้างขึ้นไม่ได้กระทำโดยบุคคลจริง",
+                checkAge: "ฉันมีอายุ 18 ปีขึ้นไป (I am 18+)",
+                checkAi: "ฉันเข้าใจว่าเนื้อหาทั้งหมดเป็นภาพที่สร้างขึ้น ไม่ใช่บุคคลจริง",
+                btnLeave: "Leave (ออก)",
+                btnContinue: "Continue (เข้าสู่เว็บไซต์)",
+                status: "พร้อมรับงาน / คอนเทนต์ใหม่พร้อมส่ง"
             },
             en: {
                 subtitle: "Telegram channels, membership details & commission info.",
@@ -594,12 +890,20 @@ If I am unable to fulfill your request, you will receive a refund. Please note t
                 tagFree: "FREE",
                 btnVip: "Join Premium VIP ($3/mo)",
                 btnTip: "Tip KiKi ❤️‍🔥 (Send Tip/Support)",
-                btnContact: "Contact Admin / Request Commission",
+                btnContactTg: "Contact Admin / Commission (Telegram)",
+                btnContactX: "Contact Admin / Commission (Twitter / X)",
                 pricingTitle: "Pricing & Package Details",
                 imgNote: "(Tap image to view full size)",
                 btnDetailsShow: "Show Pricing Details (Text)",
                 btnDetailsHide: "Hide Pricing Details (Text)",
-                footer: "❤️ Thank you for your support!"
+                footer: "❤️ Thank you for your support!",
+                gateTitle: "Age Verification",
+                gateDesc: "You must be 18+ to join this site. Contents are generated by AI and do not represent real persons.",
+                checkAge: "I am 18 years of age or older",
+                checkAi: "I understand that all contents are generated images and not real persons",
+                btnLeave: "Leave",
+                btnContinue: "Continue",
+                status: "Open for Commissions / Daily Updates"
             }
         };
 
@@ -613,10 +917,20 @@ If I am unable to fulfill your request, you will receive a refund. Please note t
             document.getElementById('txt-tag-free').innerText = translations[lang].tagFree;
             document.getElementById('txt-btn-vip').innerText = translations[lang].btnVip;
             document.getElementById('txt-btn-tip').innerText = translations[lang].btnTip;
-            document.getElementById('txt-btn-contact').innerText = translations[lang].btnContact;
+            document.getElementById('txt-btn-contact-tg').innerText = translations[lang].btnContactTg;
+            document.getElementById('txt-btn-contact-x').innerText = translations[lang].btnContactX;
             document.getElementById('txt-pricing-title').innerText = translations[lang].pricingTitle;
             document.getElementById('txt-img-note').innerText = translations[lang].imgNote;
             document.getElementById('txt-footer').innerText = translations[lang].footer;
+            document.getElementById('txt-status').innerText = translations[lang].status;
+
+            // Age Gate Language Update
+            document.getElementById('txt-gate-title').innerText = translations[lang].gateTitle;
+            document.getElementById('txt-gate-desc').innerText = translations[lang].gateDesc;
+            document.getElementById('txt-check-age').innerText = translations[lang].checkAge;
+            document.getElementById('txt-check-ai').innerText = translations[lang].checkAi;
+            document.getElementById('txt-btn-leave').innerText = translations[lang].btnLeave;
+            document.getElementById('btnContinue').innerText = translations[lang].btnContinue;
 
             // Update Accordion Text
             const container = document.getElementById('detailsContainer');
